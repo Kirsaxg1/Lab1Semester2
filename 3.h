@@ -8,6 +8,8 @@ class complex {
 	double actual_part;
 	double imaginary_part;
 
+public:
+
 	complex(const complex& other) = default;
 	~complex() = default;
 	complex(double actual_part = 0,double imaginary_part = 0);
