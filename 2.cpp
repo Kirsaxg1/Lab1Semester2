@@ -38,7 +38,7 @@ logical_values_array logical_values_array::coimplication(const logical_values_ar
 
 logical_values_array logical_values_array::addition_modulo(const logical_values_array& other) const
 {
-	//todo
+	return (_value^ other._value);
 }
 
 logical_values_array logical_values_array::equivalence(const logical_values_array& other) const

@@ -5,8 +5,8 @@
 
 class complex {
 
-	double actual_part;
-	double imaginary_part;
+	double _actual_part;
+	double _imaginary_part;
 
 public:
 
