@@ -61,6 +61,15 @@ bool logical_values_array::get_bit(size_t index) const
 	return ((_value >> index) & 1) != 0U;
 }
 
+bool logical_values_array::operator[](size_t index) const
+{
+	if (index >= sizeof(unsigned int) * 8)
+	{
+		throw std::out_of_range("Index out of range");
+	}
+	return get_bit(index);
+}
+
 void logical_values_array::to_binary_string(char* buffer) const
 {
 	unsigned int mask = 1 << (sizeof(_value) * 8 - 1);

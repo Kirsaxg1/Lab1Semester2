@@ -172,3 +172,94 @@ matrix& matrix::operator*=(double other)
 	*this = *this * other;
 	return *this;
 }
+
+matrix matrix::transposed_matrix() const
+{
+	matrix result(_j, _i);
+	for (size_t row = 0; row < _i; ++row)
+	{
+		for (size_t col = 0; col < _j; ++col)
+		{
+			result._data[col][row] = _data[row][col];
+		}
+	}
+	return result;
+}
+
+double matrix::determinant() const
+{
+//TODO
+}
+
+matrix matrix::transposed_matrix() const
+{
+	matrix result(_j, _i);
+	for (size_t row = 0; row < _i; ++row)
+	{
+		for (size_t col = 0; col < _j; ++col)
+		{
+			result._data[col][row] = _data[row][col];
+		}
+	}
+	return result;
+}
+
+matrix matrix::inverse() const
+{
+	if (_i != _j)
+	{
+		throw std::invalid_argument("Error arg");
+	}
+
+	double det = determinant();
+	if (std::abs(det) < 1e-9)
+	{ 
+		throw std::runtime_error("Error:)");
+	}
+
+	if (_i == 1)
+	{
+		matrix result(1, 1);
+		result._data[0][0] = 1.0 / _data[0][0];
+		return result;
+	}
+
+	if (_i == 2)
+	{
+		matrix result(2, 2);
+		result._data[0][0] = _data[1][1] / det;
+		result._data[0][1] = -_data[0][1] / det;
+		result._data[1][0] = -_data[1][0] / det;
+		result._data[1][1] = _data[0][0] / det;
+		return result;
+	}
+
+	matrix result(_i, _j);
+
+	for (size_t row = 0; row < _i; ++row)
+	{
+		for (size_t col = 0; col < _j; ++col)
+		{
+			// Create submatrix
+			matrix submatrix(_i - 1, _j - 1);
+			size_t sub_row = 0;
+			for (size_t i = 0; i < _i; ++i)
+			{
+				if (i == row) continue;
+				size_t sub_col = 0;
+				for (size_t j = 0; j < _j; ++j)
+				{
+					if (j == col) continue;
+					submatrix._data[sub_row][sub_col] = _data[i][j];
+					sub_col++;
+				}
+				sub_row++;
+			}
+
+			result._data[col][row] = std::pow(-1, row + col) * submatrix.determinant() / det;
+		}
+	}
+
+	return result;
+}
+

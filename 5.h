@@ -1,34 +1,19 @@
-#include <iostream>
-
-//typedef struct PriorItem {
-//	int priority;
-//	char* data;
-//}PriorItem;
-//
-//typedef struct PriorQueue {
-//	PriorItem* items;
-//	size_t size;
-//	size_t capacity;
-//}PriorQueue;
-//
-//
-//PriorQueue* insert_value();
-//PriorQueue* search_max();
-//PriorQueue* removeMax();
-//PriorQueue* merge();
+#ifndef  PRIORITY_QUEUE_H
+#define PRIORITY_QUEUE_H
 
 class priority_queue {
 
 public:
 
-	priority_queue(); 
 	virtual ~priority_queue() = default;
-	priority_queue& operator = (const priority_queue& other) = default;
-	priority_queue(const priority_queue& other) = default;
 
-	virtual void insert(char* str, int priority);
-	[[nodiscard]] virtual int* search()const;
-	[[nodiscard]] virtual int remove()const;
-	virtual priority_queue* merge(priority_queue* other);
+	virtual void insert(int priority, char* data);
+	virtual char* peek() = 0;
+	virtual char* peek_priority() = 0;
+	virtual priority_queue* merge(priority_queue* other) = 0;
 
+
+	virtual size_t size() = 0;
+	virtual void remove() = 0;
 };
+#endif // ! PRIORITY_QUEUE_H

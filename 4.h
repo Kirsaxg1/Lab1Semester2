@@ -26,7 +26,7 @@ public:
 
 
 	[[nodiscard]] matrix transposed_matrix()const;
-	[[nodiscard]] matrix determinant() const;
+	[[nodiscard]] double determinant() const;
 	[[nodiscard]] matrix inverse() const;
 
 	int operator[](size_t index_i, size_t index_j) const;

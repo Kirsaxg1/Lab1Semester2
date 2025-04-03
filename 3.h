@@ -28,7 +28,7 @@ public:
 	complex& operator /= (const complex& other);
 
 	[[nodiscard]] double abs()const;
-	[[nodescard]] double arg()const;
+	[[nodiscard]] double arg()const;
 
 
 	friend std::ostream& operator<<(std::ostream& out, const complex& number);
